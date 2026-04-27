@@ -2,9 +2,23 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import os
 
 app = Flask(__name__)
-app.secret_key = 'dark_side_key' # Секретный ключ для сессий
+app.secret_key = 'dark_side_key'
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Проверяем, есть ли папка для гифок, если нет — создаем
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# Твоя "база данных" в памяти
+users = {} 
+gifs = [] 
+
+@app.route('/')
+def index():
+    return render_template('index.html', gifs=gifs, user=session.get('user'))
+
+# Дальше твой код @app.route('/register') и так далее...
 
 # "База данных" в памяти для примера (в реале лучше SQL)
 users = {} # {логин: пароль}
