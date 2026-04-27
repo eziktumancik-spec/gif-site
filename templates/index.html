@@ -2,45 +2,64 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>GIF Star Destroyer</title>
+    <title>ГИФ Сайт Ёжика Туманчика</title>
     <style>
         body { 
-            background: #121212; 
-            color: #00FF41; 
-            font-family: 'Courier New', monospace; 
+            background: #2c3e50; /* Темно-синий "туманный" фон */
+            color: #ecf0f1; 
+            font-family: 'Trebuchet MS', sans-serif; 
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 50px;
         }
-        .container { border: 2px solid #00FF41; padding: 20px; box-shadow: 0 0 15px #00FF41; }
-        input { background: #000; border: 1px solid #00FF41; color: #00FF41; padding: 10px; margin: 5px; }
-        button { background: #00FF41; color: #000; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; }
+        .container { 
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            border: 2px dashed #95a5a6;
+        }
+        h1 { color: #f1c40f; text-shadow: 2px 2px #2c3e50; }
+        input { border-radius: 5px; border: none; padding: 10px; margin: 5px; }
+        button { background: #e67e22; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        button:hover { background: #d35400; }
         .gif-list { margin-top: 30px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .footer { margin-top: 20px; font-style: italic; color: #bdc3c7; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>[ SYSTEM: GIF_STAR_DESTROYER ]</h1>
+        <h1>🦔 ГИФ САЙТ ЁЖИКА ТУМАНЧИКА ☁️</h1>
+        <p>Добро пожаловать в туман! Поделись своей гифкой.</p>
 
         {% if not user %}
-            <h3>Вход в систему:</h3>
-            <form action="/register" method="POST">
-                <input type="text" name="username" placeholder="Логин" required>
-                <input type="password" name="password" placeholder="Пароль" required>
-                <button type="submit">ИНИЦИИРОВАТЬ</button>
-            </form>
+            <div style="margin-top: 20px;">
+                <form action="/register" method="POST">
+                    <input type="text" name="username" placeholder="Имя ёжика" required>
+                    <input type="password" name="password" placeholder="Пароль" required>
+                    <br>
+                    <button type="submit">ВЫЙТИ ИЗ ТУМАНА</button>
+                </form>
+            </div>
         {% else %}
-            <p>Добро пожаловать, адмирал <strong>{{ user }}</strong>!</p>
-            <a href="/logout" style="color: #FF3131;">[ ВЫХОД ]</a>
+            <p>Привет, <strong>{{ user }}</strong>! Ты успешно нашёл лошадку. 🐴</p>
+            <a href="/logout" style="color: #ecf0f1;">[ Уйти обратно в туман ]</a>
         {% endif %}
     </div>
 
     <div class="gif-list">
         {% for gif in gifs %}
-            <img src="{{ gif }}" width="200">
+            <div style="border: 1px solid #7f8c8d; padding: 5px; background: white;">
+                <img src="{{ gif }}" width="200">
+            </div>
         {% endfor %}
+    </div>
+
+    <div class="footer">
+        "Лошаааадкаааа!.." — (с) 2026
     </div>
 
 </body>
